@@ -21,3 +21,8 @@ public_publication_detail:
     requirements:
         scienceId: \d+
         publicationId: \d+
+
+public_publish:
+    path: /publier
+    defaults:
+        _controller: AppBundle:App:publish

@@ -13,7 +13,17 @@ class PublicationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('author')->add('description')->add('content')->add('publishedAt')->add('validated')->add('science');
+        $builder
+            ->add('title')
+            ->add('author')
+            ->add('description')
+            ->add('content')
+            ->add('science');
+        if ($options['admin_mode']){
+            $builder
+                ->add('publishedAt')
+                ->add('validated');
+        }
     }
     
     /**
@@ -22,7 +32,8 @@ class PublicationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Publication'
+            'data_class' => 'AppBundle\Entity\Publication',
+            'admin_mode' => true,
         ));
     }
 
