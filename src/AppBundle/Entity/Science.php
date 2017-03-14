@@ -25,6 +25,9 @@ class Science
     private $description;
 
 
+    public function __toString(){
+        return $this->title;
+    }
     /**
      * Get id
      *

@@ -1,4 +1,13 @@
+app_publication:
+    resource: "@AppBundle/Resources/config/routing/publication.yml"
+    prefix:   /publication
+
+app_science:
+    resource: "@AppBundle/Resources/config/routing/science.yml"
+    prefix:   /science
+    
 app_admin_dashboard:
     path: /
     defaults:
         _controller: AppBundle:Admin/Dashboard:dashboard
+

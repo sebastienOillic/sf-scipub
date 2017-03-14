@@ -1,0 +1,11 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block content %}
+    <h1>{{science.title}}</h1>
+    {% for publication in publications %}
+        <a href="{{path('public_publication_detail', {
+            'scienceId': science.id,
+            'publicationId': publication.id,
+        })}}"><li>{{publication.title}}</li></a>
+    {% endfor %}
+{% endblock %}

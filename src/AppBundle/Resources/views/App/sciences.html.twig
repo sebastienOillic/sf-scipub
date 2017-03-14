@@ -1,0 +1,9 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block content %}
+    {% for science in sciences %}
+        <a href="{{path('public_science_detail', {
+            'scienceId': science.id,
+        })}}"><li>{{science.title}}</li></a>
+    {% endfor %}
+{% endblock %}

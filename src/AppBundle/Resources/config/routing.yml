@@ -1,7 +1,3 @@
-app_science:
-    resource: "@AppBundle/Resources/config/routing/science.yml"
-    prefix:   /science
-
 app_admin:
     resource: "routing/admin.yml"
     prefix:   /admin
@@ -9,6 +5,5 @@ app_admin:
 app_public:
     resource: "routing/public.yml"
 
-app_publication:
-        resource: "@AppBundle/Resources/config/routing/publication.yml"
-        prefix:   /publication
+
+

@@ -45,6 +45,7 @@ class PublicationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $publication->setPublishedAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($publication);
             $em->flush($publication);
