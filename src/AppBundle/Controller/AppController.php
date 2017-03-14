@@ -19,7 +19,10 @@ class AppController extends Controller
      */
     public function homeAction(Request $request)
     {
-        return $this->render('AppBundle:App:home.html.twig');
+        $publications = $this->getDoctrine()->getManager()->getRepository('AppBundle\Entity\Publication')->findBy(['validated' => 1], [], 3);
+        return $this->render('AppBundle:App:home.html.twig', [
+            'publications' => $publications,
+        ]);
     }
 
     public function scienceListAction(Request $request){
@@ -34,7 +37,7 @@ class AppController extends Controller
         $em = $this->getDoctrine()->getManager();
         $science = $em->getRepository('AppBundle\Entity\Science')->findOneBy(['id' => $scienceId]);
         if (!$science){
-            return $this->redirectToRoute('science_list');
+            return $this->redirectToRoute('public_science_list');
         }
         $publications = $em->getRepository('AppBundle\Entity\Publication')->findBy(['science' => $science, 'validated'=> 1], ['publishedAt' => 'DESC'], 3);
         return $this->render('AppBundle:App:science.html.twig',[
@@ -45,6 +48,20 @@ class AppController extends Controller
     }
 
     public function publicationDetailAction(Request $request){
-        return new Response('ok');
+        $scienceId = $request->attributes->get('scienceId');
+        $publicationId = $request->attributes->get('publicationId');
+        $em = $this->getDoctrine()->getManager();
+        $science = $em->getRepository('AppBundle\Entity\Science')->findOneBy(['id' => $scienceId]);
+        if (!$science){
+            return $this->redirectToRoute('public_science_list');
+        }
+        $publication = $em->getRepository('AppBundle\Entity\Publication')->findOneBy(['science' => $science, 'id' => $publicationId, 'validated'=> 1]);
+        if (!$publication){
+            return $this->redirectToRoute('public_science_detail', ['scienceId' => $science->getId()]);
+        }
+
+        return $this->render('AppBundle:App:publication.html.twig', [
+            'publication' => $publication,
+        ]);
     }
 }

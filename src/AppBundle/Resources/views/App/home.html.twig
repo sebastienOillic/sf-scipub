@@ -1,4 +1,12 @@
 {% extends  'AppBundle::base.html.twig' %}
-{% block content %}
 
+
+{% block content %}
+    <h1>{% block title %}Scipub - Les publication scientifiques. Uniquement en Lipsum.{% endblock %}</h1>
+    {% for publication in publications %}
+        <a href="{{path('public_publication_detail', {
+            'scienceId': publication.science.id,
+            'publicationId': publication.id,
+        })}}"><li>{{publication.title}}</li></a>
+    {% endfor %}
 {% endblock %}

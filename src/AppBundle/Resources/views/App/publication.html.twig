@@ -1,0 +1,7 @@
+{% extends 'AppBundle::base.html.twig' %}
+{% block content %}
+    <h1>{{publication.title}}</h1>
+    <p>Écrit par {{publication.author}} <br>le {{publication.publishedAt | date('d/m/Y')}}<br></p>
+    <p>{{publication.content | raw}}</p>
+
+{% endblock %}
